@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+    <title>Maranuchok</title>
+
+    <!-- Фикс прыгающей адресной строки на телефонах -->
+    <script>
+    function fixVH() {
+        document.documentElement.style.setProperty(
+            '--vh',
+            (window.innerHeight * 0.01) + 'px'
+        );
+    }
+    fixVH();
+    window.addEventListener('resize', fixVH);
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+
+    <div id="login-screen" class="screen active">
+        <div class="login-box">
+            <h1>Maranuchok</h1>
+            <input type="text" id="username" placeholder="Имя пользователя">
+            <input type="password" id="password" placeholder="Пароль">
+            <button id="btn-login">Войти / Регистрация</button>
+            <p class="hint">Введите данные, если аккаунта нет — он создастся.</p>
+        </div>
+    </div>
+
+    <div id="chat-screen" class="screen">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h3 id="my-username">User</h3>
+                <button id="btn-create-group">+ Группа</button>
+            </div>
+            
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Поиск людей...">
+                <div id="search-results" class="hidden"></div>
+            </div>
+
+            <div id="chat-list"></div>
+        </div>
+
+        <div class="main-chat">
+            <div class="chat-header" id="current-chat-header">
+                <button id="btn-back" class="mobile-only hidden">&lt; Назад</button>
+                <span id="chat-title-span">Выберите чат</span>
+                <button id="btn-add-member" class="hidden" title="Добавить участника">👤+</button>
+            </div>
+            
+            <div class="messages-area" id="messages-area"></div>
+            
+            <div class="input-area hidden" id="input-area">
+                <label for="file-input" class="attach-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" 
+                         stroke="currentColor" stroke-width="2">
+                        <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+                    </svg>
+                </label>
+                <input type="file" id="file-input" hidden>
+                <input type="text" id="message-input" placeholder="Написать сообщение...">
+                <button id="btn-send">Send</button>
+            </div>
+
+            <div id="upload-status"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> <
